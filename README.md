@@ -2,7 +2,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/gangming/sql2struct)](https://goreportcard.com/report/github.com/gangming/sql2struct)
 [![GoDoc](https://godoc.org/github.com/gangming/sql2struct?status.svg)](https://godoc.org/github.com/gangming/sql2struct)
 [![codecov](https://codecov.io/gh/gangming/sql2struct/branch/main/graph/badge.svg)](https://codecov.io/gh/gangming/sql2struct)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 # sql2struct
 mysql database to golang struct for gorm model
 
