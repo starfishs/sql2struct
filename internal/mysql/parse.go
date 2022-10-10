@@ -29,6 +29,8 @@ func GenerateFile(ddl string) error {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+
+	os.MkdirAll("model", 0755)
 	f, _ := os.Create("model/" + strings.ToLower(c.Name) + ".go")
 	defer f.Close()
 
