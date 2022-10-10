@@ -2,14 +2,15 @@ package infra
 
 import (
 	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"time"
 )
 
 var pool *sql.DB
 
-func InitDBMysql() {
+func InitDBMysql(dsn string) {
 	var err error
-	pool, err = sql.Open("mysql", "planet_finance:finance123456@tcp(sandbox-common-finance-mysql.cluster-choxzj9zxm2u.rds.cn-northwest-1.amazonaws.com.cn:3306)/settle_setting?parseTime=true&charset=utf8&loc=Local")
+	pool, err = sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
 	}
@@ -17,4 +18,7 @@ func InitDBMysql() {
 	pool.SetMaxIdleConns(20)
 	pool.SetConnMaxLifetime(100 * time.Second)
 
+}
+func GetDB() *sql.DB {
+	return pool
 }
