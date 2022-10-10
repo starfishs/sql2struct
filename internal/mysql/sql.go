@@ -17,7 +17,7 @@ type {{ .UpperCamelCaseName}} struct {
 {{range .Fields}} {{.UpperCamelCaseName}}  {{.Type}} {{.Tag}} {{if .Comment}} // {{.Comment}} {{end}}
 {{end}}}
 
-func (t *{{.UpperCamelCaseName}}) String() string {
+func (t *{{.UpperCamelCaseName}}) TableName() string {
     return "{{.Table.Name}}"
 }
 `
