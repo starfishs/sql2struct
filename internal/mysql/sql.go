@@ -2,6 +2,8 @@ package mysqlparser
 
 import (
 	"bytes"
+	"github.com/gangming/sql2struct/config"
+	"github.com/gangming/sql2struct/internal/infra"
 	"github.com/gangming/sql2struct/utils"
 	"strings"
 	"text/template"
@@ -17,6 +19,7 @@ type {{ .UpperCamelCaseName}} struct {
 {{range .Fields}} {{.UpperCamelCaseName}}  {{.Type}} {{.Tag}} {{if .Comment}} // {{.Comment}} {{end}}
 {{end}}}
 
+// TableName the name of table in database
 func (t *{{.UpperCamelCaseName}}) TableName() string {
     return "{{.Table.Name}}"
 }
@@ -95,18 +98,22 @@ func ParseMysqlDDL(s string) (Table, error) {
 	return table, nil
 }
 func (t *Table) GenerateCode() string {
+	tableName := config.Cnf.TablePrefix + t.Name
 	tmpl = strings.Replace(tmpl, "{{.Package}}", "model", -1)
-	tmpl = strings.Replace(tmpl, "{{.Table.Name}}", t.Name, -1)
+	tmpl = strings.Replace(tmpl, "{{.Table.Name}}", tableName, -1)
 	tmpl = strings.Replace(tmpl, "{{.Table.Comment}}", t.Comment, -1)
 	for i, field := range t.Fields {
-		tag := "`gorm:\"column:" + field.Name + "\""
+		tag := "`" + config.Cnf.DBTag + ":\"column:" + field.Name + "\""
 		if field.IsPK {
 			tag += ";primary_key\" "
 		}
 		if field.DefaultValue != "" {
 			tag += ";default:" + field.DefaultValue + "\""
 		}
-		tag += " json:\"" + field.Name + "\"`"
+		if config.Cnf.WithJsonTag {
+			tag += " json:\"" + field.Name + "\""
+		}
+		tag += "`"
 		t.Fields[i].Tag = tag
 	}
 	tl := template.Must(template.New("tmpl").Parse(tmpl))
@@ -116,4 +123,56 @@ func (t *Table) GenerateCode() string {
 		panic(err)
 	}
 	return res.String()
+}
+
+func GetDDLs() ([]string, error) {
+	var result []string
+	tables := GetTables()
+	for _, tableName := range tables {
+		rows, err := infra.GetDB().Query("show create table " + tableName)
+		if err != nil {
+			panic(err)
+		}
+
+		if rows.Next() {
+			var r string
+			err := rows.Scan(&tableName, &r)
+			if err != nil {
+				panic(err)
+			}
+			result = append(result, r)
+		}
+	}
+
+	return result, nil
+}
+func GetTables() []string {
+	if len(config.Cnf.Tables) > 0 {
+		return config.Cnf.Tables
+	}
+	var result []string
+	rows, err := infra.GetDB().Query("show tables")
+	if err != nil {
+		panic(err)
+	}
+
+	for rows.Next() {
+		var r string
+		err := rows.Scan(&r)
+		if err != nil {
+			panic(err)
+		}
+		result = append(result, r)
+	}
+	return result
+}
+func Run() error {
+	ddls, err := GetDDLs()
+	if err != nil {
+		return err
+	}
+	for _, ddl := range ddls {
+		GenerateFile(ddl)
+	}
+	return nil
 }
