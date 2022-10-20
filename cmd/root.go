@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/gangming/sql2struct/config"
 	"github.com/gangming/sql2struct/internal/infra"
 	mysqlparser "github.com/gangming/sql2struct/internal/mysql"
 	"github.com/gangming/sql2struct/utils"
-	"os"
-
 	"github.com/spf13/cobra"
 )
 
@@ -52,11 +52,11 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&config.Cnf.DSN, "dsn", "", "database dsn string (eg: root:123456@tcp(localhost:3306)/test?charset=utf8)")
 	rootCmd.MarkFlagRequired("dsn")
-	rootCmd.PersistentFlags().StringVarP(&config.Cnf.DBTag, "dbtag", "g", "", "db tag. default: gorm")
+	rootCmd.PersistentFlags().StringVarP(&config.Cnf.DBTag, "dbtag", "g", "gorm", "db tag. default: gorm")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.TablePrefix, "prefix", "p", "", "table prefixed with the table name")
 	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithJsonTag, "with_json_tag", "j", true, "with json tag. default: true")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.OutputDir, "output_dir", "o", "./model", "output dir. default: ./model")
-	rootCmd.PersistentFlags().StringArrayVarP(&config.Cnf.Tables, "tables", "t", []string{""}, "Need to generate tables, default is all tables. (eg: -t table1 -t table2)")
+	rootCmd.PersistentFlags().StringArrayVarP(&config.Cnf.Tables, "tables", "t", nil, "Need to generate tables, default is all tables. (eg: -t table1 -t table2)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
