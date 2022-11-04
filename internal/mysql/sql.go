@@ -126,7 +126,7 @@ func (t *Table) GenerateCode() string {
 	if err != nil {
 		panic(err)
 	}
-	return res.String()
+	return utils.CommonInitialisms(res.String())
 }
 
 func GetDDLs() ([]string, error) {
