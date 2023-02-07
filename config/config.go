@@ -10,6 +10,7 @@ type Config struct {
 	DBTag       string   `yaml:"db_tag"`        // db tag. default: gorm
 	WithJsonTag bool     `yaml:"with_json_tag"` // with json tag. default: true
 	OutputDir   string   `yaml:"output_dir"`    // output dir. default: ./model
+	PackageName string   `yaml:"package_name"`  // package name. default: model
 }
 
 func init() {
@@ -19,5 +20,6 @@ func init() {
 		DBTag:       "gorm",
 		WithJsonTag: true,
 		OutputDir:   "./model",
+		PackageName: "model",
 	}
 }
