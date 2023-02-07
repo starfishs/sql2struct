@@ -2,8 +2,9 @@ package infra
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var pool *sql.DB
