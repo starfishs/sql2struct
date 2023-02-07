@@ -1,12 +1,13 @@
 package mysqlparser
 
 import (
-	"github.com/gangming/sql2struct/config"
-	"github.com/gangming/sql2struct/utils"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/gangming/sql2struct/config"
+	"github.com/gangming/sql2struct/utils"
 )
 
 func GenerateFile(ddl string) error {

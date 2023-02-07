@@ -31,6 +31,7 @@ var MysqlType2GoType = map[string]string{
 	"tinyint":   "uint8",
 	"bigint":    "int64",
 	"varchar":   "string",
+	"char":      "string",
 	"text":      "string",
 	"date":      "time.Time",
 	"time":      "time.Time",
