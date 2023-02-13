@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Unit tests.
-        run: make test
+        run: go test -v ./...
