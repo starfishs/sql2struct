@@ -175,7 +175,10 @@ func Run() error {
 		return err
 	}
 	for _, ddl := range ddls {
-		GenerateFile(ddl)
+		err := GenerateFile(ddl)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }

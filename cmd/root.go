@@ -23,7 +23,7 @@ var rootCmd = &cobra.Command{
 		// Do Stuff Here
 		if config.Cnf.DSN == "" {
 			utils.PrintRed("dsn is empty")
-			cmd.Help()
+			_ = cmd.Help()
 			os.Exit(1)
 		}
 		infra.InitDBMysql(config.Cnf.DSN)
@@ -56,7 +56,7 @@ func init() {
 	//rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sql2struct.yaml)")
 
 	rootCmd.PersistentFlags().StringVar(&config.Cnf.DSN, "dsn", "", "database dsn string (eg: root:123456@tcp(localhost:3306)/test?charset=utf8)")
-	rootCmd.MarkFlagRequired("dsn")
+	_ = rootCmd.MarkFlagRequired("dsn")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.DBTag, "dbtag", "g", "gorm", "db tag. default: gorm")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.TablePrefix, "prefix", "p", "", "table prefixed with the table name")
 	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithJsonTag, "with_json_tag", "j", true, "with json tag. default: true")
