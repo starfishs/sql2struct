@@ -13,7 +13,10 @@ import (
 func GenerateFile(ddl string) error {
 	c, _ := ParseMysqlDDL(ddl)
 	dir := config.Cnf.OutputDir
-	os.MkdirAll(dir, 0755)
+	err := os.MkdirAll(dir, 0755)
+	if err != nil {
+		return err
+	}
 	fileName := filepath.Join(dir, strings.ToLower(c.Name)+".go")
 	fd, err := os.Create(fileName)
 
@@ -21,7 +24,10 @@ func GenerateFile(ddl string) error {
 		panic(err)
 	}
 	defer fd.Close()
-	fd.Write([]byte(c.GenerateCode()))
+	_, err = fd.Write([]byte(c.GenerateCode()))
+	if err != nil {
+		return err
+	}
 
 	_, err = exec.Command("goimports", "-l", "-w", dir).Output()
 	if err != nil {
