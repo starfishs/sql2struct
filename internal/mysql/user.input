@@ -1,0 +1,13 @@
+CREATE TABLE `user` (
+                        `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+                        `user_id` int(11) NOT NULL COMMENT '用户 id',
+                        `email` varchar(64) NOT NULL DEFAULT '' COMMENT '用户邮箱',
+                        `phone` char(11) DEFAULT NULL COMMENT '手机号',
+                        `role` tinyint(1) NOT NULL COMMENT '用户角色  1:超级管理员 2:其他',
+                        `website_url` varchar(255) DEFAULT NULL COMMENT '个人主页',
+                        `remark` text COMMENT '备注',
+                        `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+                        `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+                        `deleted_at` datetime(6) DEFAULT NULL COMMENT '移除时间',
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表'
