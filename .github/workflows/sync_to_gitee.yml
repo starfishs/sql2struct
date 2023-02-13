@@ -1,0 +1,23 @@
+# https://github.com/Yikun/hub-mirror-action
+name: SyncToGitee
+on:
+  push:
+    branches:
+      - main
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source codes
+        uses: actions/checkout@v3
+
+      - name: Mirror the Github organization repos to Gitee.
+        uses: Yikun/hub-mirror-action@master
+        with:
+          src: 'github/gangming'    					# 这里为自己github账号名称
+          dst: 'gitee/gangming'     					# 这里为gitee上账号名称
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}  	# 这是生成的私钥
+          dst_token:  ${{ secrets.GITEE_TOKEN }}     	# 这是gitee上生成的token
+          force_update: true
+          static_list: "sql2sturct"   					# 同步的仓库名称，意思是会自动同步该仓库到gitee下同名仓库
+          debug: true
