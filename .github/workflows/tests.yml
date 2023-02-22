@@ -26,3 +26,5 @@ jobs:
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
           go test -v ./...
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
