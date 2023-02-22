@@ -29,6 +29,7 @@ func (t *{{.UpperCamelCaseName}}) TableName() string {
 var MysqlType2GoType = map[string]string{
 	"int":       "int64",
 	"tinyint":   "uint8",
+	"decimal":   "float64",
 	"bigint":    "int64",
 	"varchar":   "string",
 	"char":      "string",
