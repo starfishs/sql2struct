@@ -20,3 +20,8 @@ sql2struct --dsn="root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 
 # TODO List
 - [ ] support postgreSQL
+
+## collaborators
+
+<!-- readme: collaborators,contributors -start -->
+<!-- readme: collaborators,contributors -end -->
