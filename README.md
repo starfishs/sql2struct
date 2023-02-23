@@ -24,4 +24,21 @@ sql2struct --dsn="root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 ## Contributors
 
 <!-- readme: contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/gangming">
+            <img src="https://avatars.githubusercontent.com/u/15102743?v=4" width="100;" alt="gangming"/>
+            <br />
+            <sub><b>Ming.gang</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/miajio">
+            <img src="https://avatars.githubusercontent.com/u/22339709?v=4" width="100;" alt="miajio"/>
+            <br />
+            <sub><b>Snaro Chris Xiao</b></sub>
+        </a>
+    </td></tr>
+</table>
 <!-- readme: contributors -end -->
