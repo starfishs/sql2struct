@@ -26,7 +26,7 @@ jobs:
           echo GO_VERSION=$(go version | awk '{print $3;}') >> $GITHUB_ENV
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v1
+        uses: goreleaser/goreleaser-action@v4.2.0
         with:
           version: latest
           args: release --rm-dist
