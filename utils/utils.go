@@ -12,7 +12,11 @@ func Underline2UpperCamelCase(s string) string {
 			continue
 		}
 		if i == 0 || (i > 0 && s[i-1] == '_') {
-			result += string(v - 32)
+			if v > 96 && v < 123 {
+				result += string(v - 32)
+			} else {
+				result += string(v)
+			}
 		} else {
 			result += string(v)
 		}
