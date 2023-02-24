@@ -1,24 +1,28 @@
 package utils
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
+	"unicode"
 )
 
+// Underline2UpperCamelCase hump naming after prefix to upper
 func Underline2UpperCamelCase(s string) string {
-	var result string
+	var buf bytes.Buffer
 	for i, v := range s {
 		if v == '_' {
 			continue
 		}
 		if i == 0 || (i > 0 && s[i-1] == '_') {
-			result += string(v - 32)
-		} else {
-			result += string(v)
+			buf.WriteRune(unicode.ToUpper(v))
+			continue
 		}
+		buf.WriteRune(v)
 	}
-	return result
+	return buf.String()
 }
+
 func PrintGreen(s string) {
 	fmt.Printf("\033[32m%s\033[0m\n", s)
 }
