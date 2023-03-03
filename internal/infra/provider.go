@@ -5,13 +5,14 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 var pool *sql.DB
 
-func InitDBMysql(dsn string) {
+func InitDB(driverName, dsn string) {
 	var err error
-	pool, err = sql.Open("mysql", dsn)
+	pool, err = sql.Open(driverName, dsn)
 	if err != nil {
 		panic(err)
 	}

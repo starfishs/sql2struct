@@ -9,7 +9,7 @@ import (
 	"github.com/gangming/sql2struct/config"
 )
 
-func TestGenerateFile(t *testing.T) {
+func TestMysqlGenerateFile(t *testing.T) {
 	type args struct {
 		ddl string
 	}
@@ -36,7 +36,12 @@ func TestGenerateFile(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := GenerateFile(tt.args.ddl); (err != nil) != tt.wantErr {
+			p := new(mysqlParser)
+			tableStruct, err := p.ParseMysqlDDL(tt.args.ddl)
+			if err != nil {
+				t.Errorf("ParseMysqlDDL() error = %v", err)
+			}
+			if err := tableStruct.GenerateFile(); (err != nil) != tt.wantErr {
 				t.Errorf("GenerateFile() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
