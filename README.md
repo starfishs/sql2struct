@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/gangming/sql2struct/branch/main/graph/badge.svg)](https://codecov.io/gh/gangming/sql2struct)
 ![License](https://img.shields.io/badge/license-GPL-blue.svg)
 # sql2struct
-mysql database to golang struct for gorm model
+mysql/postgresql database to golang struct for gorm model
 
 # install
 ```shell
@@ -18,8 +18,10 @@ go install github.com/gangming/sql2struct@latest
 sql2struct --dsn="root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 ```
 
-# TODO List
-- [ ] support postgreSQL
+#  support
+- [x] mysql
+- [x] postgreSQL
+
 
 ## Contributors
 
