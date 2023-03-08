@@ -34,6 +34,10 @@ func PrintRed(s string) {
 	fmt.Printf("\033[31m%s\033[0m\n", s)
 }
 
+func PrintRedf(format string, a ...interface{}) {
+	fmt.Printf("\033[31m"+format+"\033[0m\n", a...)
+}
+
 // commonInitialisms from https://github.com/golang/lint/blob/master/lint.go#L770
 var commonInitialisms = []string{"ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "LHS", "QPS", "RAM", "RHS", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS"}
 
@@ -46,4 +50,8 @@ func CommonInitialisms(s string) string {
 		commonInitialismsReplacer = append(commonInitialismsReplacer, strings.ToUpper(l[:1])+l[1:], initialism)
 	}
 	return strings.NewReplacer(commonInitialismsReplacer...).Replace(s)
+}
+
+func GetDriverName(dsn string) string {
+	return strings.Split(dsn, ":")[0]
 }

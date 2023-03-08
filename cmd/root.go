@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gangming/sql2struct/config"
+	"github.com/gangming/sql2struct/internal/driver"
 	"github.com/gangming/sql2struct/internal/infra"
-	mysqlparser "github.com/gangming/sql2struct/internal/mysql"
 	"github.com/gangming/sql2struct/utils"
 	"github.com/spf13/cobra"
 )
@@ -14,8 +14,8 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "sql2struct",
-	Short: "sql2struct is a tool for generating golang struct from mysql database",
-	Long: `sql2struct is a tool for generating golang struct from mysql database.
+	Short: "sql2struct is a tool for generating golang struct from mysql/postgresql database",
+	Long: `sql2struct is a tool for generating golang struct from mysql/postgresql database.
 `,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
@@ -26,8 +26,10 @@ var rootCmd = &cobra.Command{
 			_ = cmd.Help()
 			os.Exit(1)
 		}
-		infra.InitDBMysql(config.Cnf.DSN)
-		err := mysqlparser.Run()
+		driverName := utils.GetDriverName(config.Cnf.DSN)
+		infra.InitDB(driverName, config.Cnf.DSN)
+
+		err := driver.NewSqlDriverGenerator(driverName).Run()
 		if err != nil {
 			fmt.Println(err.Error())
 		}
@@ -39,7 +41,7 @@ var rootCmd = &cobra.Command{
 func Execute() {
 	defer func() {
 		if err := recover(); err != nil {
-			utils.PrintRed(fmt.Sprintf("%v", err))
+			utils.PrintRedf("error occur %v", err)
 		}
 	}()
 	err := rootCmd.Execute()
@@ -60,6 +62,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.DBTag, "dbtag", "g", "gorm", "db tag. default: gorm")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.TablePrefix, "prefix", "p", "", "table prefixed with the table name")
 	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithJsonTag, "with_json_tag", "j", true, "with json tag. default: true")
+	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithDefaultValue, "with_default_value", "", false, "with db default value. default: false")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.OutputDir, "output_dir", "o", "./model", "output dir. default: ./model")
 	rootCmd.PersistentFlags().StringArrayVarP(&config.Cnf.Tables, "tables", "t", nil, "Need to generate tables, default is all tables. (eg: -t table1 -t table2)")
 
