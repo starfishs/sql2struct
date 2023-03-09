@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/gangming/sql2struct/config"
@@ -26,12 +25,17 @@ var rootCmd = &cobra.Command{
 			_ = cmd.Help()
 			os.Exit(1)
 		}
-		driverName := utils.GetDriverName(config.Cnf.DSN)
-		infra.InitDB(driverName, config.Cnf.DSN)
-
-		err := driver.NewSqlDriverGenerator(driverName).Run()
+		driverName, dsn, err := utils.ParseDsn(config.Cnf.DSN)
 		if err != nil {
-			fmt.Println(err.Error())
+			utils.PrintRed("dsn is invalid")
+			_ = cmd.Help()
+			os.Exit(1)
+		}
+		infra.InitDB(driverName, dsn)
+
+		err = driver.NewSqlDriverGenerator(driverName).Run()
+		if err != nil {
+			utils.PrintRed(err.Error())
 		}
 	},
 }
@@ -64,7 +68,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithJsonTag, "with_json_tag", "j", true, "with json tag. default: true")
 	rootCmd.PersistentFlags().BoolVarP(&config.Cnf.WithDefaultValue, "with_default_value", "", false, "with db default value. default: false")
 	rootCmd.PersistentFlags().StringVarP(&config.Cnf.OutputDir, "output_dir", "o", "./model", "output dir. default: ./model")
-	rootCmd.PersistentFlags().StringArrayVarP(&config.Cnf.Tables, "tables", "t", nil, "Need to generate tables, default is all tables. (eg: -t table1 -t table2)")
+	rootCmd.PersistentFlags().StringArrayVarP(&config.Cnf.TableRegexs, "table_regexs", "t", nil, "Need to generate table names regexs, default is all tables. (eg: -t table1 -t table2)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

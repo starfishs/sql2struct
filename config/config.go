@@ -3,7 +3,7 @@ package config
 var Cnf *Config
 
 type Config struct {
-	Tables           []string `yaml:"tables"`             // Need to generate tables, default is all tables
+	TableRegexs      []string `yaml:"table_regexs"`       // Need to generate tables, default is all tables
 	DBType           string   `yaml:"db_type"`            // default: mysql
 	DSN              string   `yaml:"dsn"`                // data source name (DSN) to use when connecting to the database
 	TablePrefix      string   `yaml:"table_prefix"`       // table prefixed with the table name
@@ -17,7 +17,7 @@ type Config struct {
 func init() {
 	Cnf = &Config{
 		DBType:      "mysql",
-		Tables:      []string{},
+		TableRegexs: []string{},
 		DBTag:       "gorm",
 		WithJsonTag: true,
 		OutputDir:   "./model",

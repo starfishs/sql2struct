@@ -15,7 +15,7 @@ go install github.com/gangming/sql2struct@latest
 
 # usage
 ```shell
-sql2struct --dsn="root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
+sql2struct --dsn="mysql://root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 ```
 
 #  support

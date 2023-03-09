@@ -83,6 +83,10 @@ func (m *mysqlParser) ParseMysqlDDL(s string) (table.Table, error) {
 func (m *mysqlParser) GetDDLs() ([]string, error) {
 	var result []string
 	tables := m.GetTables()
+	if len(tables) == 0 {
+		utils.PrintRedf("no table found")
+		return nil, fmt.Errorf("no table found")
+	}
 	for _, tableName := range tables {
 		rows, err := infra.GetDB().Query("show create table " + tableName)
 		if err != nil {
@@ -102,9 +106,6 @@ func (m *mysqlParser) GetDDLs() ([]string, error) {
 	return result, nil
 }
 func (m *mysqlParser) GetTables() []string {
-	if len(config.Cnf.Tables) > 0 {
-		return config.Cnf.Tables
-	}
 	var result []string
 	rows, err := infra.GetDB().Query("show tables")
 	if err != nil {
@@ -119,7 +120,7 @@ func (m *mysqlParser) GetTables() []string {
 		}
 		result = append(result, r)
 	}
-	return result
+	return table.FilterTables(result)
 }
 func (m *MysqlGenerator) Run() error {
 	p := &mysqlParser{}
