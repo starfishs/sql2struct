@@ -100,3 +100,30 @@ func (t *Table) GenerateFile() error {
 	utils.PrintGreen(fileName + " generate success")
 	return nil
 }
+
+func FilterTables(tables []string) []string {
+	if len(config.Cnf.TableRegexs) == 0 {
+		return tables
+	}
+	var res []string
+	for _, table := range tables {
+		for _, r := range config.Cnf.TableRegexs {
+			if utils.IsMatch(r, table) {
+				res = append(res, table)
+			}
+		}
+	}
+	return res
+}
+
+func NameIsMatch(table string) bool {
+	if len(config.Cnf.TableRegexs) == 0 {
+		return true
+	}
+	for _, r := range config.Cnf.TableRegexs {
+		if utils.IsMatch(r, table) {
+			return true
+		}
+	}
+	return false
+}

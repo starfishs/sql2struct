@@ -3,6 +3,7 @@ package utils
 import (
 	"bytes"
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode"
 )
@@ -52,6 +53,20 @@ func CommonInitialisms(s string) string {
 	return strings.NewReplacer(commonInitialismsReplacer...).Replace(s)
 }
 
-func GetDriverName(dsn string) string {
-	return strings.Split(dsn, ":")[0]
+func ParseDsn(dsn string) (driverName, newDsn string, err error) {
+	strs := strings.Split(dsn, "://")
+	if len(strs) != 2 {
+		return "", "", fmt.Errorf("dsn format error")
+	}
+	driverName = strs[0]
+	newDsn = dsn
+	if driverName == "mysql" {
+		newDsn = strs[1]
+	}
+	return
+}
+
+func IsMatch(pattern, str string) bool {
+	match, _ := regexp.MatchString(pattern, str)
+	return match
 }

@@ -2,7 +2,7 @@ package postgresql
 
 import (
 	"database/sql"
-	"fmt"
+	"errors"
 	"log"
 	"strings"
 
@@ -103,6 +103,9 @@ var PgType2GoType = map[string]string{
 func (p *PgGenerator) Run() error {
 	parser := &pgParser{}
 	tables, err := parser.GetAllTables()
+	if len(tables) == 0 {
+		return errors.New("no table found")
+	}
 	if err != nil {
 		return err
 	}
@@ -125,13 +128,8 @@ func (p *pgParser) GetAllTables() ([]*table.Table, error) {
 		err    error
 		tables []*table.Table
 	)
+	rows, err = infra.GetDB().Query("select relname as tabname,COALESCE(cast(obj_description(relfilenode,'pg_class') as varchar),'') as comment from pg_class c where relname in (select tablename from pg_tables where schemaname='public' and position('_2' in tablename)=0)")
 
-	if len(config.Cnf.Tables) > 0 {
-		tablesStr := strings.Join(config.Cnf.Tables, "','")
-		rows, err = infra.GetDB().Query("select relname as tabname,COALESCE(cast(obj_description(relfilenode,'pg_class') as varchar),'') as comment from pg_class c where relname in ($1)", tablesStr)
-	} else {
-		rows, err = infra.GetDB().Query("select relname as tabname,COALESCE(cast(obj_description(relfilenode,'pg_class') as varchar),'') as comment from pg_class c where relname in (select tablename from pg_tables where schemaname='public' and position('_2' in tablename)=0)")
-	}
 	if err != nil {
 		panic(err)
 	}
@@ -146,13 +144,15 @@ func (p *pgParser) GetAllTables() ([]*table.Table, error) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		if !table.NameIsMatch(tableName) {
+			continue
+		}
 		tables = append(tables, &table.Table{
 			Package:            config.Cnf.PackageName,
 			Name:               tableName,
 			UpperCamelCaseName: utils.Underline2UpperCamelCase(tableName),
 			Comment:            comment,
 		})
-		fmt.Println(tableName)
 	}
 	return tables, err
 }
@@ -173,7 +173,6 @@ func (p *pgParser) ParseFields(t *table.Table) error {
 		)
 
 		err = rows.Scan(&tableName, &fieldName, &isPrimaryKey, &fieldType, &defaultValue, &fieldComment)
-		fieldComment = fieldType
 		if err != nil {
 			log.Fatal(err)
 		}
