@@ -1,10 +1,10 @@
 /*
-Copyright © 2022 gangming <gangmingcool@gmail.com>
+Copyright © 2022 starfishs <starfishscool@gmail.com>
 
 */
 package main
 
-import "github.com/gangming/sql2struct/cmd"
+import "github.com/starfishs/sql2struct/cmd"
 
 func main() {
 	cmd.Execute()

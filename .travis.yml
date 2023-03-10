@@ -3,7 +3,7 @@ go:
   - 1.18.x
   - main
 
-go_import_path: github.com/gangming/sql2struct
+go_import_path: github.com/starfishs/sql2struct
 
 before_install:
   - go get -t -v ./...

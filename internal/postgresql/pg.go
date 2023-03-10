@@ -6,10 +6,10 @@ import (
 	"log"
 	"strings"
 
-	"github.com/gangming/sql2struct/config"
-	"github.com/gangming/sql2struct/internal/infra"
-	"github.com/gangming/sql2struct/internal/table"
-	"github.com/gangming/sql2struct/utils"
+	"github.com/starfishs/sql2struct/config"
+	"github.com/starfishs/sql2struct/internal/infra"
+	"github.com/starfishs/sql2struct/internal/table"
+	"github.com/starfishs/sql2struct/utils"
 )
 
 type pgParser struct {

@@ -3,11 +3,11 @@ package cmd
 import (
 	"os"
 
-	"github.com/gangming/sql2struct/config"
-	"github.com/gangming/sql2struct/internal/driver"
-	"github.com/gangming/sql2struct/internal/infra"
-	"github.com/gangming/sql2struct/utils"
 	"github.com/spf13/cobra"
+	"github.com/starfishs/sql2struct/config"
+	"github.com/starfishs/sql2struct/internal/driver"
+	"github.com/starfishs/sql2struct/internal/infra"
+	"github.com/starfishs/sql2struct/utils"
 )
 
 // rootCmd represents the base command when called without any subcommands

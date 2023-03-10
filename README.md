@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/gangming/sql2struct.svg?branch=main)](https://travis-ci.org/gangming/sql2struct)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gangming/sql2struct)](https://goreportcard.com/report/github.com/gangming/sql2struct)
-[![GoDoc](https://godoc.org/github.com/gangming/sql2struct?status.svg)](https://godoc.org/github.com/gangming/sql2struct)
-[![codecov](https://codecov.io/gh/gangming/sql2struct/branch/main/graph/badge.svg)](https://codecov.io/gh/gangming/sql2struct)
+[![Build Status](https://travis-ci.org/starfishs/sql2struct.svg?branch=main)](https://travis-ci.org/starfishs/sql2struct)
+[![Go Report Card](https://goreportcard.com/badge/github.com/starfishs/sql2struct)](https://goreportcard.com/report/github.com/starfishs/sql2struct)
+[![GoDoc](https://godoc.org/github.com/starfishs/sql2struct?status.svg)](https://godoc.org/github.com/starfishs/sql2struct)
+[![codecov](https://codecov.io/gh/starfishs/sql2struct/branch/main/graph/badge.svg)](https://codecov.io/gh/starfishs/sql2struct)
 ![License](https://img.shields.io/badge/license-GPL-blue.svg)
 # sql2struct
 mysql/postgresql database to golang struct for gorm model

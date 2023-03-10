@@ -1,4 +1,4 @@
-module github.com/gangming/sql2struct
+module github.com/starfishs/sql2struct
 
 go 1.18
 
