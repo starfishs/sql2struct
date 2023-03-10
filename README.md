@@ -30,9 +30,16 @@ sql2struct --dsn="mysql://root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 <tr>
     <td align="center">
         <a href="https://github.com/starfishs">
-            <img src="https://avatars.githubusercontent.com/u/15102743?v=4" width="100;" alt="gangming"/>
+            <img src="https://avatars.githubusercontent.com/u/15102743?v=4" width="100;" alt="starfishs"/>
             <br />
-            <sub><b>Ming.gang</b></sub>
+            <sub><b>Starfish</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/minggang90">
+            <img src="https://avatars.githubusercontent.com/u/29141309?v=4" width="100;" alt="minggang90"/>
+            <br />
+            <sub><b>Null</b></sub>
         </a>
     </td>
     <td align="center">
