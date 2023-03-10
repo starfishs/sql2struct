@@ -8,7 +8,7 @@ mysql/postgresql database to golang struct for gorm model
 
 # install
 ```shell
-go install github.com/gangming/sql2struct@latest
+go install github.com/starfishs/sql2struct@latest
 ```
 
 
@@ -29,7 +29,7 @@ sql2struct --dsn="mysql://root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 <table>
 <tr>
     <td align="center">
-        <a href="https://github.com/gangming">
+        <a href="https://github.com/starfishs">
             <img src="https://avatars.githubusercontent.com/u/15102743?v=4" width="100;" alt="gangming"/>
             <br />
             <sub><b>Ming.gang</b></sub>
