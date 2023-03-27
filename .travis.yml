@@ -1,7 +1,6 @@
 language: go
 go:
   - 1.18.x
-  - main
 
 go_import_path: github.com/starfishs/sql2struct
 
