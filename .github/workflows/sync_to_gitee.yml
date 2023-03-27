@@ -14,10 +14,10 @@ jobs:
       - name: Mirror the Github organization repos to Gitee.
         uses: Yikun/hub-mirror-action@master
         with:
-          src: 'github/starfishs'    					# 这里为自己github账号名称
-          dst: 'gitee/starfishs'     					# 这里为gitee上账号名称
-          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}  	# 这是生成的私钥
-          dst_token:  ${{ secrets.GITEE_TOKEN }}     	# 这是gitee上生成的token
+          src: 'github/starfishs'    					
+          dst: 'gitee/goohappy'     					
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}  	
+          dst_token:  ${{ secrets.GITEE_TOKEN }}     	
           force_update: true
-          static_list: "sql2struct"   					# 同步的仓库名称，意思是会自动同步该仓库到gitee下同名仓库
+          static_list: "sql2struct"   					
           debug: true
