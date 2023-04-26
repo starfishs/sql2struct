@@ -18,6 +18,6 @@ func NewSqlDriverGenerator(driverName string) ModelGenerator {
 	if driverName == "postgres" {
 		return postgresql.NewPgParser()
 	}
-	utils.PrintRedf("unsupported driver %s", driverName)
+	utils.PrintRedf("unsupported driver %s, supported `mysql` `postgres` ", driverName)
 	return nil
 }
