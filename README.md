@@ -17,6 +17,10 @@ go install github.com/starfishs/sql2struct@latest
 ```shell
 sql2struct --dsn="mysql://root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
 ```
+# docker
+```shell
+docker run  -v /path/to/store:/workspace -w /workspace  starfishsfive/sql2struct:v1.0.0 --dsn="postgresql://root:123456@localhost:5432/test?sslmode=disable"
+```
 
 #  support
 - [x] mysql
