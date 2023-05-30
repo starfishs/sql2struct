@@ -36,17 +36,17 @@ sql2struct --dsn="mysql://root:123456@tcp(localhost:3306)/test?charset=utf8mb4"
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/calabashbrother">
-            <img src="https://avatars.githubusercontent.com/u/29141309?v=4" width="100;" alt="calabashbrother"/>
-            <br />
-            <sub><b>Null</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/miajio">
             <img src="https://avatars.githubusercontent.com/u/22339709?v=4" width="100;" alt="miajio"/>
             <br />
             <sub><b>Snaro Chris Xiao</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/calabashbrother">
+            <img src="https://avatars.githubusercontent.com/u/29141309?v=4" width="100;" alt="calabashbrother"/>
+            <br />
+            <sub><b>Null</b></sub>
         </a>
     </td></tr>
 </table>
