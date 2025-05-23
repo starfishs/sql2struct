@@ -47,6 +47,7 @@ func (m *mysqlParser) ParseMysqlDDL(s string) (table.Table, error) {
 			tableName := strings.Split(line, "`")[1]
 			t.Name = config.Cnf.TablePrefix + tableName
 			t.UpperCamelCaseName = utils.Underline2UpperCamelCase(t.Name)
+			t.UpperCamelCaseName = utils.MiddleLine2UpperCamelCase(t.UpperCamelCaseName)
 			continue
 		}
 		if strings.Contains(line, "ENGINE") && strings.Contains(line, "COMMENT=") {
@@ -58,6 +59,7 @@ func (m *mysqlParser) ParseMysqlDDL(s string) (table.Table, error) {
 			field := table.Field{}
 			field.Name = strings.Split(line, "`")[1]
 			field.UpperCamelCaseName = utils.Underline2UpperCamelCase(field.Name)
+			field.UpperCamelCaseName = utils.MiddleLine2UpperCamelCase(field.UpperCamelCaseName)
 			field.Type = strings.TrimRightFunc(strings.Split(line, " ")[1], func(r rune) bool {
 				return r < 'a' || r > 'z'
 			})
