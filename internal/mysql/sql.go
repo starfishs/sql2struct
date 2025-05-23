@@ -12,6 +12,9 @@ import (
 
 var MysqlType2GoType = map[string]string{
 	"int":       "int64",
+	"float":     "float64",
+	"double":    "float64",
+	"bit":       "uint8",
 	"tinyint":   "uint8",
 	"decimal":   "float64",
 	"bigint":    "int64",
